@@ -1,0 +1,21 @@
+# Build results
+bin/
+obj/
+out/
+
+# .NET
+*.user
+*.suo
+project.lock.json
+.vs/
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log

@@ -1,0 +1,368 @@
+/* ==========================================================================
+   FinanzasPro Stylesheet - Bootstrap 5 Dark Premium Custom Overlay
+   ========================================================================== */
+
+/* Design Tokens & Colors */
+:root {
+    --bg-main: #07090e;
+    --bg-surface: rgba(15, 20, 32, 0.7);
+    --border-translucent: rgba(255, 255, 255, 0.07);
+    
+    --primary-color: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.25);
+    
+    /* Category Accent Color Codes */
+    --cat-comida: #f59e0b;
+    --cat-comida-bg: rgba(245, 158, 11, 0.1);
+    --cat-servicios: #06b6d4;
+    --cat-servicios-bg: rgba(6, 182, 212, 0.1);
+    --cat-entretenimiento: #a855f7;
+    --cat-entretenimiento-bg: rgba(168, 85, 247, 0.1);
+    --cat-transporte: #3b82f6;
+    --cat-transporte-bg: rgba(59, 130, 246, 0.1);
+    --cat-otros: #64748b;
+    --cat-otros-bg: rgba(100, 116, 139, 0.1);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--bg-main) !important;
+    background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 400px);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* SPA Sections Transition */
+.spa-section {
+    display: none;
+}
+.spa-section.active {
+    display: block;
+    animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo Design */
+.logo-icon {
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+/* ==========================================================================
+   Card overrides (Glassmorphism)
+   ========================================================================== */
+.card {
+    background: var(--bg-surface) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-translucent) !important;
+    border-radius: 14px !important;
+    transition: var(--transition-smooth);
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Metric Cards specific hover scale and glow */
+.metric-card-custom {
+    transition: var(--transition-smooth);
+}
+.metric-card-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+}
+
+#card-total-spent:hover {
+    border-color: rgba(239, 68, 68, 0.25) !important;
+}
+#card-month-spent:hover {
+    border-color: rgba(245, 158, 11, 0.25) !important;
+}
+#card-avg-spent:hover {
+    border-color: rgba(13, 202, 240, 0.25) !important;
+}
+
+/* ==========================================================================
+   Navigation Styling (Desktop & Mobile)
+   ========================================================================== */
+/* Desktop active buttons */
+.nav-tabs-custom .nav-link {
+    color: var(--bs-secondary-color);
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    transition: var(--transition-smooth);
+    font-weight: 500;
+}
+.nav-tabs-custom .nav-link:hover {
+    color: var(--bs-body-color);
+    background: rgba(255, 255, 255, 0.03);
+}
+.nav-tabs-custom .nav-link.active {
+    color: #fff !important;
+    background-color: var(--primary-glow) !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+}
+
+/* Mobile bottom nav active button */
+.fixed-bottom {
+    background-color: rgba(10, 12, 18, 0.95) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+.fixed-bottom .nav-tab {
+    transition: var(--transition-smooth);
+    color: #6c757d !important;
+    border-radius: 8px;
+    padding: 6px 0 !important;
+}
+.fixed-bottom .nav-tab.active-mobile-tab {
+    color: var(--primary-color) !important;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+/* ==========================================================================
+   Form inputs styling adjustments
+   ========================================================================== */
+.form-control, .form-select {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.65rem 0.85rem !important;
+    transition: var(--transition-smooth) !important;
+}
+.form-control:focus, .form-select:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+.input-group-text {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-control.is-invalid, .form-select.is-invalid {
+    border-color: var(--bs-danger) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+/* Button styles overrides */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    transition: var(--transition-smooth) !important;
+}
+.btn-primary:hover {
+    background-color: #4f46e5 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+}
+
+/* ==========================================================================
+   SVG Donut Chart Custom Styling
+   ========================================================================== */
+.donut-segment {
+    fill: none;
+    stroke-width: 16;
+    transition: stroke-dasharray 0.5s ease-in-out, stroke-dashoffset 0.5s ease-in-out;
+}
+.donut-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.03);
+    stroke-width: 16;
+}
+#donut-chart-svg {
+    transform: rotate(-90deg);
+}
+
+/* Legend items design */
+.legend-color-pill {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   Table styling adjustments
+   ========================================================================== */
+.table {
+    --bs-table-bg: transparent !important;
+}
+.table td, .table th {
+    padding: 0.95rem 1rem !important;
+    border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+.table tbody tr {
+    transition: var(--transition-smooth);
+}
+.table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.015) !important;
+}
+
+/* Category badging */
+.badge-custom {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.badge-comida {
+    background: var(--cat-comida-bg);
+    color: var(--cat-comida);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+.badge-servicios {
+    background: var(--cat-servicios-bg);
+    color: var(--cat-servicios);
+    border-color: rgba(6, 182, 212, 0.2);
+}
+.badge-entretenimiento {
+    background: var(--cat-entretenimiento-bg);
+    color: var(--cat-entretenimiento);
+    border-color: rgba(168, 85, 247, 0.2);
+}
+.badge-transporte {
+    background: var(--cat-transporte-bg);
+    color: var(--cat-transporte);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+.badge-otros {
+    background: var(--cat-otros-bg);
+    color: var(--cat-otros);
+    border-color: rgba(100, 116, 139, 0.2);
+}
+
+.btn-delete-item {
+    background: transparent;
+    border: none;
+    color: #6c757d;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: var(--transition-smooth);
+}
+.btn-delete-item:hover {
+    color: var(--bs-danger);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ==========================================================================
+   Monthly Breakdown Row Styling
+   ========================================================================== */
+.monthly-bar-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+.monthly-bar-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.progress {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border-radius: 4px !important;
+}
+.progress-bar-custom {
+    background: linear-gradient(90deg, #6366f1, #3b82f6);
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Toast Alerts
+   ========================================================================== */
+.toast-custom {
+    background: rgba(10, 14, 23, 0.9) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-translucent) !important;
+    border-left: 4px solid var(--primary-color) !important;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: var(--transition-smooth);
+}
+
+.toast-custom-success {
+    border-left-color: #10b981 !important;
+}
+.toast-custom-success i {
+    color: #10b981;
+}
+
+.toast-custom-danger {
+    border-left-color: #ef4444 !important;
+}
+.toast-custom-danger i {
+    color: #ef4444;
+}
+
+.toast-custom-warning {
+    border-left-color: #f59e0b !important;
+}
+.toast-custom-warning i {
+    color: #f59e0b;
+}
+
+.toast-custom.fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Spinner Rotate Animation */
+.spin-animation {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

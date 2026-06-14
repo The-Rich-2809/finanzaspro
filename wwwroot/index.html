@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 FinanzasPro - Control de Gastos Personales</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for modern typography -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-dark text-light">
+
+    <!-- App Wrapper -->
+    <div class="d-flex flex-column min-vh-100 pb-5 pb-md-0">
+
+        <!-- DESKTOP HEADER: Fixed top on medium+ screens -->
+        <header class="navbar navbar-expand-md bg-dark border-bottom border-secondary-subtle sticky-top d-none d-md-flex py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                    <i data-lucide="wallet" class="text-primary logo-icon"></i>
+                    <span class="fs-4 fw-bold">Finanzas<span class="text-primary">Pro</span></span>
+                </a>
+                <nav class="nav nav-pills gap-2 ms-auto nav-tabs-custom">
+                    <button class="nav-link nav-tab active btn" data-target="dashboard" id="nav-btn-dashboard">
+                        <i data-lucide="layout-dashboard" class="me-1"></i> Dashboard
+                    </button>
+                    <button class="nav-link nav-tab btn" data-target="registro" id="nav-btn-registro">
+                        <i data-lucide="plus-circle" class="me-1"></i> Nuevo Gasto
+                    </button>
+                    <button class="nav-link nav-tab btn" data-target="historial" id="nav-btn-historial">
+                        <i data-lucide="history" class="me-1"></i> Historial
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MOBILE NAV HEADER: Header logo only on top -->
+        <header class="bg-dark border-bottom border-secondary-subtle py-3 d-md-none text-center sticky-top">
+            <div class="container d-flex justify-content-center align-items-center gap-2">
+                <i data-lucide="wallet" class="text-primary logo-icon" style="width: 24px; height: 24px;"></i>
+                <span class="fs-5 fw-bold">Finanzas<span class="text-primary">Pro</span></span>
+            </div>
+        </header>
+
+        <!-- MAIN SPA CONTENT WRAPPER -->
+        <main class="container flex-grow-1 py-4">
+
+            <!-- SECTION 1: DASHBOARD -->
+            <section id="dashboard" class="spa-section active">
+                <div class="mb-4">
+                    <h2 class="h3 fw-bold mb-1">📊 Resumen Financiero</h2>
+                    <p class="text-secondary small">Analiza tu consumo mensual e histórico de forma agrupada.</p>
+                </div>
+
+                <!-- Metrics Row -->
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="card h-100 bg-dark border-secondary-subtle p-3 metric-card-custom" id="card-total-spent">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-semibold tracking-wider">💸 Total Gastado</span>
+                                    <h3 class="display-6 fw-bold text-danger mt-1 mb-0" id="val-total-spent">$0.00</h3>
+                                </div>
+                                <div class="bg-danger bg-opacity-10 text-danger rounded-3 p-3">
+                                    <i data-lucide="trending-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="card h-100 bg-dark border-secondary-subtle p-3 metric-card-custom" id="card-month-spent">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-semibold tracking-wider">📅 Gastado este Mes</span>
+                                    <h3 class="display-6 fw-bold text-warning mt-1 mb-0" id="val-month-spent">$0.00</h3>
+                                </div>
+                                <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3">
+                                    <i data-lucide="calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="card h-100 bg-dark border-secondary-subtle p-3 metric-card-custom" id="card-avg-spent">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="text-secondary small text-uppercase fw-semibold tracking-wider">📈 Promedio Mensual</span>
+                                    <h3 class="display-6 fw-bold text-info mt-1 mb-0" id="val-avg-spent">$0.00</h3>
+                                </div>
+                                <div class="bg-info bg-opacity-10 text-info rounded-3 p-3">
+                                    <i data-lucide="bar-chart-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Details Grid (Responsive) -->
+                <div class="row g-4">
+                    <!-- Left: Month-by-month spending -->
+                    <div class="col-12 col-lg-6">
+                        <div class="card bg-dark border-secondary-subtle h-100 p-4 shadow-sm">
+                            <h4 class="fs-5 fw-semibold mb-4 d-flex align-items-center gap-2">
+                                <i data-lucide="bar-chart-3" class="text-primary"></i> Gastos por Mes 📆
+                            </h4>
+                            <div id="monthly-breakdown-container" class="d-flex flex-column gap-3">
+                                <!-- Generated Dynamically -->
+                                <div class="text-center py-5 text-secondary">
+                                    <i data-lucide="folder-open" class="d-block mx-auto mb-2 opacity-50" style="width: 40px; height: 40px;"></i>
+                                    <span>📭 Aún no hay datos históricos mensuales.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Category Distribution -->
+                    <div class="col-12 col-lg-6">
+                        <div class="card bg-dark border-secondary-subtle h-100 p-4 shadow-sm">
+                            <h4 class="fs-5 fw-semibold mb-4 d-flex align-items-center gap-2">
+                                <i data-lucide="pie-chart" class="text-primary"></i> Categorías 🏷️
+                            </h4>
+                            <div class="d-flex flex-column align-items-center justify-content-center flex-sm-row gap-4 py-3">
+                                <div class="position-relative" style="width: 180px; height: 180px;">
+                                    <svg width="180" height="180" viewBox="0 0 200 200" id="donut-chart-svg">
+                                        <!-- Rendered dynamically -->
+                                    </svg>
+                                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                        <span class="fs-4 fw-bold d-block text-white" id="chart-pct">0%</span>
+                                        <span class="text-secondary small uppercase tracking-wider" style="font-size: 0.65rem;">Total</span>
+                                    </div>
+                                </div>
+                                <div id="chart-legend-container" class="flex-grow-1 w-100 w-sm-auto d-flex flex-column gap-2 mt-3 mt-sm-0">
+                                    <!-- Generated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: FORM -->
+            <section id="registro" class="spa-section">
+                <div class="mb-4">
+                    <h2 class="h3 fw-bold mb-1">➕ Registrar Gasto</h2>
+                    <p class="text-secondary small">Agrega los detalles de tu nueva compra para actualizar las estadísticas.</p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="card bg-dark border-secondary-subtle p-4 shadow-sm">
+                            <form id="expense-form" novalidate>
+                                <div class="row g-3">
+                                    <!-- Concepto -->
+                                    <div class="col-12">
+                                        <label for="expense-concept" class="form-label small fw-semibold text-secondary">Concepto / Descripción</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-black border-secondary-subtle text-secondary"><i data-lucide="file-text" style="width: 18px;"></i></span>
+                                            <input type="text" class="form-control bg-dark border-secondary-subtle text-light" id="expense-concept" placeholder="Ej. Compras supermercado, Gasolina..." required>
+                                            <div class="invalid-feedback" id="error-concept">El concepto es obligatorio.</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Monto -->
+                                    <div class="col-12 col-sm-6">
+                                        <label for="expense-amount" class="form-label small fw-semibold text-secondary">Monto ($)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-black border-secondary-subtle text-secondary"><i data-lucide="dollar-sign" style="width: 18px;"></i></span>
+                                            <input type="number" class="form-control bg-dark border-secondary-subtle text-light" id="expense-amount" placeholder="0.00" step="0.01" min="0.01" required>
+                                            <div class="invalid-feedback" id="error-amount">Ingresa un monto válido mayor a 0.</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Categoría -->
+                                    <div class="col-12 col-sm-6">
+                                        <label for="expense-category" class="form-label small fw-semibold text-secondary">Categoría</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-black border-secondary-subtle text-secondary"><i data-lucide="tag" style="width: 18px;"></i></span>
+                                            <select class="form-select bg-dark border-secondary-subtle text-light" id="expense-category" required>
+                                                <option value="" disabled selected>Selecciona...</option>
+                                                <option value="Comida">🍔 Comida</option>
+                                                <option value="Servicios">💡 Servicios</option>
+                                                <option value="Entretenimiento">🎮 Entretenimiento</option>
+                                                <option value="Transporte">🚗 Transporte</option>
+                                                <option value="Otros">📦 Otros</option>
+                                            </select>
+                                            <div class="invalid-feedback" id="error-category">Selecciona una categoría.</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fecha -->
+                                    <div class="col-12">
+                                        <label for="expense-date" class="form-label small fw-semibold text-secondary">Fecha</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-black border-secondary-subtle text-secondary"><i data-lucide="calendar" style="width: 18px;"></i></span>
+                                            <input type="date" class="form-control bg-dark border-secondary-subtle text-light" id="expense-date" required>
+                                            <div class="invalid-feedback" id="error-date">Selecciona una fecha válida.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-2 mt-4">
+                                    <button type="button" class="btn btn-outline-secondary px-3" id="btn-clear-form">
+                                        <i data-lucide="trash-2" class="me-1" style="width: 16px;"></i> Limpiar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary px-4" id="btn-submit-expense">
+                                        <i data-lucide="plus" class="me-1" style="width: 16px;"></i> Guardar Gasto 💾
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: HISTORY -->
+            <section id="historial" class="spa-section">
+                <div class="mb-4">
+                    <h2 class="h3 fw-bold mb-1">📜 Historial de Gastos</h2>
+                    <p class="text-secondary small">Revisa, filtra y elimina cualquiera de tus transacciones registradas.</p>
+                </div>
+
+                <!-- Filters Card -->
+                <div class="card bg-dark border-secondary-subtle p-3 mb-3">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text bg-black border-secondary-subtle text-secondary"><i data-lucide="search" style="width: 16px;"></i></span>
+                                <input type="text" class="form-control bg-dark border-secondary-subtle text-light" id="filter-search" placeholder="Buscar concepto...">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <select class="form-select bg-dark border-secondary-subtle text-light" id="filter-category">
+                                <option value="Todos">🗂️ Todas las categorías</option>
+                                <option value="Comida">🍔 Comida</option>
+                                <option value="Servicios">💡 Servicios</option>
+                                <option value="Entretenimiento">🎮 Entretenimiento</option>
+                                <option value="Transporte">🚗 Transporte</option>
+                                <option value="Otros">📦 Otros</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="card bg-dark border-secondary-subtle overflow-hidden shadow-sm">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover mb-0 align-middle">
+                            <thead class="table-group-divider border-secondary-subtle">
+                                <tr>
+                                    <th class="ps-3 py-3 text-secondary small text-uppercase">Fecha</th>
+                                    <th class="py-3 text-secondary small text-uppercase">Concepto</th>
+                                    <th class="py-3 text-secondary small text-uppercase">Categoría</th>
+                                    <th class="py-3 text-end text-secondary small text-uppercase">Monto</th>
+                                    <th class="py-3 text-center text-secondary small text-uppercase" style="width: 100px;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenses-table-body">
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Empty Filters View -->
+                    <div id="table-empty" class="text-center py-5 text-secondary d-none">
+                        <i data-lucide="search-code" class="d-block mx-auto mb-2 opacity-50" style="width: 42px; height: 42px;"></i>
+                        <span>🔍 No se encontraron gastos con los filtros aplicados.</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER: Desktop and Large Screens only -->
+        <footer class="bg-dark border-top border-secondary-subtle py-3 mt-auto d-none d-md-block text-center text-secondary small">
+            <div class="container">
+                <p class="mb-0">&copy; 2026 FinanzasPro. Hecho con Bootstrap 5 y JavaScript Vanilla.</p>
+            </div>
+        </footer>
+
+        <!-- MOBILE NAV BAR: Bottom fixed menu only on mobile screen sizes -->
+        <nav class="navbar fixed-bottom bg-dark border-top border-secondary-subtle py-2 d-md-none shadow-lg">
+            <div class="container-fluid justify-content-around">
+                <button class="btn nav-tab text-secondary d-flex flex-column align-items-center p-0 active-mobile-tab" data-target="dashboard" style="width: 30%;">
+                    <i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i>
+                    <span class="small" style="font-size: 0.7rem;">Dashboard</span>
+                </button>
+                <button class="btn nav-tab text-secondary d-flex flex-column align-items-center p-0" data-target="registro" style="width: 30%;">
+                    <i data-lucide="plus-circle" style="width: 20px; height: 20px;"></i>
+                    <span class="small" style="font-size: 0.7rem;">Registro</span>
+                </button>
+                <button class="btn nav-tab text-secondary d-flex flex-column align-items-center p-0" data-target="historial" style="width: 30%;">
+                    <i data-lucide="history" style="width: 20px; height: 20px;"></i>
+                    <span class="small" style="font-size: 0.7rem;">Historial</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Notification Toast Target -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container" style="z-index: 1055;"></div>
+
+    <!-- Bootstrap 5 Bundle with Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- App Control Script -->
+    <script src="app.js"></script>
+</body>
+</html>
